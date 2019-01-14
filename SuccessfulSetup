@@ -1,0 +1,128 @@
+pi@raspberrypi:~ $ cd ~Raspi
+bash: cd: ~Raspi: No such file or directory
+pi@raspberrypi:~ $ cd~/Raspi
+bash: cd~/Raspi: No such file or directory
+pi@raspberrypi:~ $ cd ~/Raspi
+pi@raspberrypi:~/Raspi $ git config
+usage: git config [<options>]
+
+Config file location
+    --global              use global config file
+    --system              use system config file
+    --local               use repository config file
+    -f, --file <file>     use given config file
+    --blob <blob-id>      read config from given blob object
+
+Action
+    --get                 get value: name [value-regex]
+    --get-all             get all values: key [value-regex]
+    --get-regexp          get values for regexp: name-regex [value-regex]
+    --get-urlmatch        get value specific for the URL: section[.var] URL
+    --replace-all         replace all matching variables: name value [value_regex]
+    --add                 add a new variable: name value
+    --unset               remove a variable: name [value-regex]
+    --unset-all           remove all matches: name [value-regex]
+    --rename-section      rename section: old-name new-name
+    --remove-section      remove a section: name
+    -l, --list            list all
+    -e, --edit            open an editor
+    --get-color           find the color configured: slot [default]
+    --get-colorbool       find the color setting: slot [stdout-is-tty]
+
+Type
+    --bool                value is "true" or "false"
+    --int                 value is decimal number
+    --bool-or-int         value is --bool or --int
+    --path                value is a path (file or directory name)
+
+Other
+    -z, --null            terminate values with NUL byte
+    --name-only           show variable names only
+    --includes            respect include directives on lookup
+    --show-origin         show origin of config (file, standard input, blob, command line)
+
+pi@raspberrypi:~/Raspi $ git config --global user.name "cassidjf"
+pi@raspberrypi:~/Raspi $ git config --global user.email "jfcassidy@gmail.com"
+pi@raspberrypi:~/Raspi $ git confic --global core.editor nano
+git: 'confic' is not a git command. See 'git --help'.
+
+Did you mean this?
+	config
+pi@raspberrypi:~/Raspi $ git config --global core.editor nano
+pi@raspberrypi:~/Raspi $ ls
+README.md
+pi@raspberrypi:~/Raspi $ git init
+Initialized empty Git repository in /home/pi/Raspi/.git/
+pi@raspberrypi:~/Raspi $ ls -a
+.  ..  .git  README.md
+pi@raspberrypi:~/Raspi $ ls -a .git
+.  ..  branches  config  description  HEAD  hooks  info  objects  refs
+pi@raspberrypi:~/Raspi $ git add README.md
+pi@raspberrypi:~/Raspi $ git status
+On branch master
+
+Initial commit
+
+Changes to be committed:
+  (use "git rm --cached <file>..." to unstage)
+
+	new file:   README.md
+
+pi@raspberrypi:~/Raspi $ git commit -am 'add README.md'
+[master (root-commit) bfd808d] add README.md
+ 1 file changed, 2 insertions(+)
+ create mode 100644 README.md
+pi@raspberrypi:~/Raspi $ git remote add origin git@github.com:cassidjf/Raspi.gitpi@raspberrypi:~/Raspi $ git remote -v
+origin	git@github.com:cassidjf/Raspi.git (fetch)
+origin	git@github.com:cassidjf/Raspi.git (push)
+pi@raspberrypi:~/Raspi $ git push -u origin master
+The authenticity of host 'github.com (192.30.253.112)' can't be established.
+RSA key fingerprint is SHA256:nThbg6kXUpJWGl7E1IGOCspRomTxdCARLviKw6E5SY8.
+Are you sure you want to continue connecting (yes/no)? yes
+Warning: Permanently added 'github.com,192.30.253.112' (RSA) to the list of known hosts.
+Enter passphrase for key '/home/pi/.ssh/id_rsa': 
+Counting objects: 3, done.
+Writing objects: 100% (3/3), 234 bytes | 0 bytes/s, done.
+Total 3 (delta 0), reused 0 (delta 0)
+To github.com:cassidjf/Raspi.git
+ * [new branch]      master -> master
+Branch master set up to track remote branch master from origin.
+pi@raspberrypi:~/Raspi $ git add --all
+pi@raspberrypi:~/Raspi $ git status
+On branch master
+Your branch is up-to-date with 'origin/master'.
+Changes to be committed:
+  (use "git reset HEAD <file>..." to unstage)
+
+	new file:   SuccessfulSetup
+
+pi@raspberrypi:~/Raspi $ git push -u origin master
+Enter passphrase for key '/home/pi/.ssh/id_rsa': 
+To github.com:cassidjf/Raspi.git
+ ! [rejected]        master -> master (fetch first)
+error: failed to push some refs to 'git@github.com:cassidjf/Raspi.git'
+hint: Updates were rejected because the remote contains work that you do
+hint: not have locally. This is usually caused by another repository pushing
+hint: to the same ref. You may want to first integrate the remote changes
+hint: (e.g., 'git pull ...') before pushing again.
+hint: See the 'Note about fast-forwards' in 'git push --help' for details.
+pi@raspberrypi:~/Raspi $ git pull
+Warning: Permanently added the RSA host key for IP address '192.30.253.113' to the list of known hosts.
+Enter passphrase for key '/home/pi/.ssh/id_rsa': 
+remote: Enumerating objects: 5, done.
+remote: Counting objects: 100% (5/5), done.
+remote: Compressing objects: 100% (2/2), done.
+remote: Total 3 (delta 0), reused 0 (delta 0), pack-reused 0
+Unpacking objects: 100% (3/3), done.
+From github.com:cassidjf/Raspi
+   bfd808d..0f86bd9  master     -> origin/master
+Updating bfd808d..0f86bd9
+Fast-forward
+ README.md | 1 +
+ 1 file changed, 1 insertion(+)
+pi@raspberrypi:~/Raspi $ git push -u origin master
+Enter passphrase for key '/home/pi/.ssh/id_rsa': 
+Branch master set up to track remote branch master from origin.
+Everything up-to-date
+pi@raspberrypi:~/Raspi $ 
+
