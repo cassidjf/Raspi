@@ -1,0 +1,46 @@
+Software Install (Updated) by lady ada
+The Python and C code to work with Adafruit's DHT sensors is available on Github at https://github.com/adafruit/Adafruit_Python_DHT.
+
+We use some C code to talk to the DHT sensors since they require extremely fast timing to read, and then wrap the C code in a simple Python library for easy integration into your own programs.
+Downloading the Code from Github
+The easiest way to get the code onto your Pi or Beaglebone Black is to hook up an Ethernet cable, and clone it directly using 'git', which is installed by default on most distros. Simply run the following commands from an appropriate location (ex. "/home/pi"):
+ Download: file Copy Code
+git clone https://github.com/adafruit/Adafruit_Python_DHT.git
+cd Adafruit_Python_DHT
+Installing the Library
+To install the Python library on either the Raspberry Pi or Beaglebone Black you will first need a few dependencies. Execute the following command to install these dependencies (assuming you're using Raspbian/Occidentalis on the Pi and Debian on the Beaglebone Black):
+ Download: file Copy Code
+sudo apt-get update
+sudo apt-get install build-essential python-dev python-openssl
+If you see an error that a package is already installed or at the latest version, don't worry you can ignore it and move on.
+
+Next, to install the library execute:
+ Download: file Copy Code
+sudo python setup.py install
+This should compile the code for the library and install it on your device so any Python program can access the Adafruit_DHT python module.
+Testing the Library
+To test the Python library you can run some of the example programs in the examples folder. The AdafruitDHT.py example is a simple program which takes from the command line parameters the type of sensor (11, 22, or 2302) and GPIO pin connected to the sensor, and displays a single reading from the sensor.
+
+First navigate to the examples folder by executing:
+cd examples
+Now to run the example on a Raspberry Pi with an AM2302 sensor connected to GPIO #4, execute:
+sudo ./AdafruitDHT.py 2302 4
+Make sure to run the command as root with the sudo command as shown above or else the program will fail to run (root access is required for reading and writing the GPIO pins).
+
+Alternatively, to run the example on a Beaglebone Black with a DHT22 sensor connected to pin P8_11, execute:
+sudo ./AdafruitDHT.py 22 P8_11
+Again make sure the command is run as root with sudo!
+
+After the program executes you should see both the temperature and humidity displayed once. If you see an error that the sensor could not be read, double check you have the right GPIO pin connected to the data line of the DHT sensor and specified in the last parameter.
+
+Note that sometimes you might see an error that the sensor can't be read and to try again, even if you have your connections setup correctly. This is a limitation of reading DHT sensors from Linux--there's no guarantee the program will be given enough priority and time by the Linux kernel to reliably read the sensor. If this occurs, run the program again (or call the read function again in your code) to try to get a new reading. In testing on both the Raspberry Pi & Beaglebone Black, about 75% of the read requests should generally succeed and return a result (assuming the board is not under heavy load).
+
+Examine the source code for AdafruitDHT.py and simpletest.py to see simple examples of reading the DHT sensors from Python code.
+
+C Language Code
+If you'd like to access the DHT sensors using C/C++, you can use the C code that powers the Python library in your own program. Look at the source/Raspberry_Pi or source/Beaglebone_Black directory to see the C code for the Raspberry Pi or Beaglebone Black respectively. The code exposes a single function like pi_dht_read which performs the bitbang read of the DHT sensor.
+
+Feel free to copy this code into your own program to read DHT sensors. Note that you will need to include all the .c & .h files in the directory, and the common_dht_read.c & common_dht_read.h files in the parent source directory. 
+WIRING CONNECTING TO GOOGLES DOCS (UPDATED)
+This guide was first published on Aug 24, 2012. It was last updated on Aug 24, 2012.
+This page (Software Install (Updated)) was last updated on Jun 11, 2015.
